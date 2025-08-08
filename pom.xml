@@ -11,8 +11,13 @@
 	</parent>
 
 	<name>Explore With Me</name>
+    <modules>
+        <module>core</module>
+		<module>infra</module>
+		<module>stats</module>
+	</modules>
 
-	<groupId>ru.practicum</groupId>
+    <groupId>ru.practicum</groupId>
 	<artifactId>explore-with-me</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -20,7 +25,20 @@
 	<properties>
 		<java.version>21</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring-cloud-dependencies.version>2023.0.3</spring-cloud-dependencies.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud-dependencies.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<pluginManagement>
@@ -82,6 +100,19 @@
 					<version>0.8.12</version>
 					<configuration>
 						<output>file</output>
+						<excludes>
+							<exclude>stats/**</exclude>
+							<exclude>infra/**</exclude>
+							<exclude>core/main-service/src/main/java/ewm/category/**</exclude>
+							<exclude>core/main-service/src/main/java/ewm/comment/**</exclude>
+							<exclude>core/main-service/src/main/java/ewm/configuration/**</exclude>
+							<exclude>core/main-service/src/main/java/ewm/error/**</exclude>
+							<exclude>core/main-service/src/main/java/ewm/events/**</exclude>
+							<exclude>core/main-service/src/main/java/ewm/requests/**</exclude>
+							<exclude>core/main-service/src/main/java/ewm/utils/**</exclude>
+							<exclude>core/main-service/src/main/java/ewm/user/**</exclude>
+							<exclude>core/main-service/src/main/java/ewm/compilation/**</exclude>
+						</excludes>
 					</configuration>
 					<executions>
 						<execution>
@@ -108,7 +139,7 @@
 											<limit>
 												<counter>LINE</counter>
 												<value>COVEREDRATIO</value>
-												<minimum>0.2</minimum>
+												<minimum>0.8</minimum>
 											</limit>
 											<limit>
 												<counter>BRANCH</counter>
